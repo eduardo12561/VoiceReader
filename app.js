@@ -1,9 +1,10 @@
 const main = document.querySelector('main')
 const buttonInsertText = document.querySelector('.btn-toggle')
+const buttonReadText = document.querySelector('#read')
 const divTextBox = document.querySelector('.text-box')
 const closeDivTextBox = document.querySelector('.close')
 const selectElement = document.querySelector('select')
-
+const textArea = document.querySelector('textarea')
 
 const humanExpressions = [
     { img: './img/drink.jpg', text: 'Estou com sede'},
@@ -31,8 +32,8 @@ const speakText = () => {
 }
 
 const setVoice = event => {
-    console.log(event.target.value);
-    utterance.voice = voices.find(voice => voice.name === event.target.value)
+    const selectedVoice = voices.find(voice => voice.name === event.target.value)
+    utterance.voice = selectedVoice
 }
 
 const createExpressionBox = ({ img, text }) => {
@@ -82,3 +83,8 @@ closeDivTextBox.addEventListener('click', () => {
 });
 
 selectElement.addEventListener('change', setVoice)
+
+buttonReadText.addEventListener('click', () => {
+    setTextMessage(textArea.value)
+    speakText()
+});
